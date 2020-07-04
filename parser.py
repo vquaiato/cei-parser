@@ -3,12 +3,14 @@ from os import devnull
 
 def read_sheet(file_name):
   global fix_number
-  fix_number = True if file_name == "InfoCEI.xls" or file_name == "InfoCEI(1).xls" else False
+  fix_number = file_name == "InfoCEI.xls" or file_name == "InfoCEI(1).xls"
+
   loc = (file_name) 
 
   wb = xlrd.open_workbook(loc, logfile=open(devnull, 'w'))
   global datemode
   datemode = wb.datemode
+
   return wb.sheet_by_index(0)
 
 def find_interesting_lines(sheet):
